@@ -31,6 +31,8 @@ function HomePage({ data, onMunicipioClick }) {
   const municipalitySeries = aggregateMunicipalitySeries(data?.crimesPorMunicipio ?? [], { limit: 10 });
   const periodSeries = aggregatePeriodSeries(data?.crimesPorPeriodo ?? []);
   const topNeighborhoods = aggregateTopNeighborhoods(data?.topBairros ?? [], { limit: 10 });
+  const topNeighborhoodsHeight = Math.min(520, Math.max(340, topNeighborhoods.length * 40 + 60));
+  const secondaryChartHeight = Math.max(340, topNeighborhoodsHeight);
 
   // Adiciona campo 'total' para a linha
   const periodSeriesWithTotal = periodSeries.map(item => ({
@@ -93,7 +95,7 @@ function HomePage({ data, onMunicipioClick }) {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="mes" angle={-35} textAnchor="end" height={58} tickMargin={12} tick={{ fill: '#475569', fontSize: 11 }} />
               <YAxis tick={{ fill: '#475569', fontSize: 12 }} />
-              <Tooltip formatter={(value) => [formatCompactNumber(value), 'Ocorrências']} />
+              <Tooltip formatter={(value, name) => [formatCompactNumber(value), name]} />
               <Line type="monotone" dataKey="patrimonial" name={CATEGORY_LABELS.patrimonial} stroke={CATEGORY_COLORS.patrimonial} strokeWidth={3} dot={{ r: 3 }} />
               <Line type="monotone" dataKey="violencia_social" name={CATEGORY_LABELS.violencia_social} stroke={CATEGORY_COLORS.violencia_social} strokeWidth={3} dot={{ r: 3 }} />
               <Line type="monotone" dataKey="digital" name={CATEGORY_LABELS.digital} stroke={CATEGORY_COLORS.digital} strokeWidth={3} dot={{ r: 3 }} />
@@ -128,7 +130,7 @@ function HomePage({ data, onMunicipioClick }) {
 
       <section className="chart-grid chart-grid-secondary">
         <ChartCard title="Distribuição por período do dia" subtitle="Barras empilhadas com linha representando o total de ocorrências">
-          <ResponsiveContainer width="100%" height={280}>
+          <ResponsiveContainer width="100%" height={secondaryChartHeight}>
             <BarChart data={periodSeriesWithTotal} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis
@@ -138,7 +140,7 @@ function HomePage({ data, onMunicipioClick }) {
               />
               <YAxis yAxisId="left" tick={{ fill: '#475569', fontSize: 12 }} />
               <YAxis yAxisId="right" orientation="right" hide />
-              <Tooltip formatter={(value) => [formatCompactNumber(value), 'Ocorrências']} />
+              <Tooltip formatter={(value, name) => [formatCompactNumber(value), name]} />
               <Legend />
               <Bar yAxisId="left" dataKey="patrimonial" stackId="a" fill={CATEGORY_COLORS.patrimonial} name={CATEGORY_LABELS.patrimonial} />
               <Bar yAxisId="left" dataKey="violencia_social" stackId="a" fill={CATEGORY_COLORS.violencia_social} name={CATEGORY_LABELS.violencia_social} />
@@ -150,13 +152,20 @@ function HomePage({ data, onMunicipioClick }) {
         </ChartCard>
 
         <ChartCard title="Top bairros" subtitle="Bairros mais recorrentes no recorte atual">
-          <ResponsiveContainer width="100%" height={280}>
+          <ResponsiveContainer width="100%" height={topNeighborhoodsHeight}>
             <BarChart data={topNeighborhoods} layout="vertical" margin={{ top: 10, right: 20, left: 30, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis type="number" />
-              <YAxis type="category" dataKey="bairro" width={130} />
+              <XAxis type="number" tick={{ fill: '#475569', fontSize: 12 }} />
+              <YAxis
+                type="category"
+                dataKey="bairro"
+                width={200}
+                tick={{ fill: '#475569', fontSize: 12 }}
+                tickMargin={12}
+                interval={0}
+              />
               <Tooltip formatter={(value) => [formatCompactNumber(value), 'Ocorrências']} />
-              <Bar dataKey="quantidade" fill="#334155" radius={[0, 8, 8, 0]} />
+              <Bar dataKey="quantidade" fill="#334155" radius={[0, 8, 8, 0]} barSize={18} />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>

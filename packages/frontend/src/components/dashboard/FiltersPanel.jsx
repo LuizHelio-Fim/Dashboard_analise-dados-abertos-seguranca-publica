@@ -61,19 +61,23 @@ function FiltersPanel({
     };
   }, [isOpen]);
 
+  const handleClosePanel = () => setIsOpen(false);
+
   const panelContent = isOpen && portalContainer && buttonRect ? createPortal(
-    <div 
-      className="filters-panel-portal"
-      style={{
-        position: 'fixed',
-        top: buttonRect.bottom + 8,
-        right: window.innerWidth - buttonRect.right,
-        width: '600px',
-        maxWidth: '90vw',
-        zIndex: 9999,
-      }}
-    >
-      <div className="filters-panel">
+    <div className="filters-panel-portal">
+      <div className="filters-panel-overlay" onClick={handleClosePanel} />
+      <div
+        className="filters-panel"
+        style={{
+          position: 'fixed',
+          top: buttonRect.bottom + 10,
+          right: window.innerWidth - buttonRect.right,
+          width: '620px',
+          maxWidth: '94vw',
+          zIndex: 10000,
+        }}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="filters-panel-header">
           <div className="filters-tabs">
             <button 
@@ -174,7 +178,7 @@ function FiltersPanel({
     <div className="filters-panel-container">
       <button 
         ref={buttonRef}
-        className="filters-toggle-button"
+        className={`filters-toggle-button${isOpen ? ' open' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >

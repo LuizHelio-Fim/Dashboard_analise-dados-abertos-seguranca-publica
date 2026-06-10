@@ -42,6 +42,16 @@ def get_top_bairros() -> list[dict]:
 
 
 @lru_cache(maxsize=1)
+def get_crimes_por_periodo_por_municipio() -> list[dict]:
+    return _load_csv(PROCESSED_DATA_DIR / PROCESSED_FILES['crimes_por_periodo_por_municipio'])
+
+
+@lru_cache(maxsize=1)
+def get_crimes_por_mes_por_municipio() -> list[dict]:
+    return _load_csv(PROCESSED_DATA_DIR / PROCESSED_FILES['crimes_por_mes_por_municipio'])
+
+
+@lru_cache(maxsize=1)
 def get_comparativo_furto_roubo() -> list[dict]:
     return _load_csv(PROCESSED_DATA_DIR / PROCESSED_FILES['comparativo_furto_roubo'])
 
@@ -49,6 +59,11 @@ def get_comparativo_furto_roubo() -> list[dict]:
 @lru_cache(maxsize=1)
 def get_objetos_mais_roubados() -> list[dict]:
     return _load_csv(PROCESSED_DATA_DIR / PROCESSED_FILES['objetos_mais_roubados'])
+
+
+@lru_cache(maxsize=1)
+def get_objetos_mais_roubados_por_municipio() -> list[dict]:
+    return _load_csv(PROCESSED_DATA_DIR / PROCESSED_FILES['objetos_mais_roubados_por_municipio'])
 
 
 @lru_cache(maxsize=1)
@@ -70,11 +85,14 @@ def get_dashboard_bundle() -> dict:
     return {
         'kpisHome': get_kpis_home(),
         'crimesPorMes': get_crimes_por_mes(),
+        'crimesPorMesPorMunicipio': get_crimes_por_mes_por_municipio(),
         'crimesPorMunicipio': get_crimes_por_municipio(),
         'crimesPorPeriodo': get_crimes_por_periodo(),
+        'crimesPorPeriodoPorMunicipio': get_crimes_por_periodo_por_municipio(),
         'topBairros': get_top_bairros(),
         'comparativoFurtoRoubo': get_comparativo_furto_roubo(),
         'objetosMaisRoubados': get_objetos_mais_roubados(),
+        'objetosMaisRoubadosPorMunicipio': get_objetos_mais_roubados_por_municipio(),
         'perfilVitimas': get_perfil_vitimas(),
         'crimesDigitaisEvolucao': get_crimes_digitais_evolucao(),
     }

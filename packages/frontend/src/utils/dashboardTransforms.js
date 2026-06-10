@@ -125,24 +125,46 @@ export function aggregateMunicipalitySeries(rows, options = {}) {
 
 export function aggregateTopNeighborhoods(rows, options = {}) {
   const grouped = new Map()
+  const nameCounts = new Map()
   const categoryKey = options.category ? normalizeKey(options.category) : ''
 
   rows.forEach((row) => {
     if (categoryKey && normalizeKey(row.categoria_macro) !== categoryKey) return
 
-    const normalizedName = normalizeKey(row.bairro)
-    if (!normalizedName) return
+    const bairroKey = normalizeKey(row.bairro)
+    const municipioKey = normalizeKey(row.municipio)
+    if (!bairroKey || !municipioKey) return
 
-    const current = grouped.get(normalizedName) ?? {
+    const uniqueKey = `${municipioKey}::${bairroKey}`
+    const current = grouped.get(uniqueKey) ?? {
+      municipio: toTitleCase(row.municipio),
       bairro: toTitleCase(row.bairro),
       quantidade: 0,
     }
 
     current.quantidade += Number(row.quantidade) || 0
-    grouped.set(normalizedName, current)
+    grouped.set(uniqueKey, current)
+
+    nameCounts.set(bairroKey, (nameCounts.get(bairroKey) || 0) + 1)
   })
 
+  const duplicateNames = new Set(
+    Array.from(nameCounts.entries())
+      .filter(([, count]) => count > 1)
+      .map(([name]) => name)
+  )
+
   return Array.from(grouped.values())
+    .map((item) => {
+      const bairroKey = normalizeKey(item.bairro)
+      if (duplicateNames.has(bairroKey)) {
+        return {
+          ...item,
+          bairro: `${item.bairro} de ${item.municipio}`,
+        }
+      }
+      return item
+    })
     .sort((left, right) => right.quantidade - left.quantidade)
     .slice(0, options.limit ?? 10)
 }

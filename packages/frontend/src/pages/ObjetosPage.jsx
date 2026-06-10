@@ -47,7 +47,7 @@ function ObjetosPage({ data }) {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="objeto" tick={{ fill: '#475569', fontSize: 11 }} />
               <YAxis tick={{ fill: '#475569', fontSize: 12 }} />
-              <Tooltip formatter={(value) => [formatCompactNumber(value), 'Ocorrências']} />
+              <Tooltip formatter={(value, name) => [formatCompactNumber(value), name]} />
               <Legend />
               <Bar dataKey="furtado" name="Furtado" fill={COLORS.furto} radius={[8, 8, 0, 0]} />
               <Bar dataKey="roubado" name="Roubado" fill={COLORS.roubo} radius={[8, 8, 0, 0]} />
@@ -61,7 +61,7 @@ function ObjetosPage({ data }) {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="mes" tick={{ fill: '#475569', fontSize: 12 }} />
               <YAxis tick={{ fill: '#475569', fontSize: 12 }} />
-              <Tooltip formatter={(value) => [formatCompactNumber(value), 'Ocorrências']} />
+              <Tooltip formatter={(value, name) => [formatCompactNumber(value), name]} />
               <Legend />
               <Bar dataKey="furtos" fill={COLORS.furto} radius={[8, 8, 0, 0]} />
               <Bar dataKey="roubos" fill={COLORS.roubo} radius={[8, 8, 0, 0]} />

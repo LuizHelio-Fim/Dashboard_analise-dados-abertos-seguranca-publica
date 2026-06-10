@@ -73,10 +73,14 @@ function App() {
     const applyCategoriasFilter = (series) => filterByCategorias(series, selectedCategorias);
 
     // Datasets que possuem data_mes
-    const crimesPorMesFiltered = applyCategoriasFilter(applyDateFilter(rawData.crimesPorMes));
+    // Quando um município está selecionado, prefira os agregados por município gerados no backend
+    const crimesPorMesSource = selectedMunicipio && rawData.crimesPorMesPorMunicipio
+      ? rawData.crimesPorMesPorMunicipio
+      : rawData.crimesPorMes;
+    const crimesPorMesFiltered = applyCategoriasFilter(applyDateFilter(crimesPorMesSource || []));
     const comparativoFurtoRouboFiltered = applyDateFilter(rawData.comparativoFurtoRoubo);
     const crimesDigitaisEvolucaoFiltered = applyDateFilter(rawData.crimesDigitaisEvolucao);
-    
+
     // Datasets que possuem municipio
     const crimesPorMunicipioFiltered = applyMunicipioFilter(applyCategoriasFilter(rawData.crimesPorMunicipio));
     const topBairrosFiltered = applyMunicipioFilter(applyCategoriasFilter(rawData.topBairros));
@@ -90,15 +94,26 @@ function App() {
       perfilVitimasFiltered = perfilVitimasFiltered.filter(item => item.municipio === selectedMunicipio);
     }
 
-    // Objetos (filtra por categoria se necessário - objetos não tem categoria, mas pode filtrar indiretamente? Deixamos como está)
-    const objetosMaisRoubadosFiltered = rawData.objetosMaisRoubados || [];
+    // Distribuição por período: prefer per-municipio pre-aggregate quando disponível
+    const crimesPorPeriodoSource = selectedMunicipio && rawData.crimesPorPeriodoPorMunicipio
+      ? rawData.crimesPorPeriodoPorMunicipio
+      : rawData.crimesPorPeriodo;
+    const crimesPorPeriodoFiltered = applyCategoriasFilter(crimesPorPeriodoSource || []);
+
+    // Objetos (suporta filtro por município quando o agregado por município estiver disponível)
+    const objetosMaisRoubadosSource = selectedMunicipio && rawData.objetosMaisRoubadosPorMunicipio
+      ? rawData.objetosMaisRoubadosPorMunicipio
+      : rawData.objetosMaisRoubados || [];
+    const objetosMaisRoubadosFiltered = selectedMunicipio && rawData.objetosMaisRoubadosPorMunicipio
+      ? filterByMunicipio(objetosMaisRoubadosSource, selectedMunicipio)
+      : objetosMaisRoubadosSource;
 
     return {
       ...rawData,
       kpisHome: rawData.kpisHome, // KPIs não filtrados (opcional)
       crimesPorMes: crimesPorMesFiltered,
       crimesPorMunicipio: crimesPorMunicipioFiltered,
-      crimesPorPeriodo: rawData.crimesPorPeriodo, // período não tem data, mantém
+      crimesPorPeriodo: crimesPorPeriodoFiltered,
       topBairros: topBairrosFiltered,
       comparativoFurtoRoubo: comparativoFurtoRouboFiltered,
       objetosMaisRoubados: objetosMaisRoubadosFiltered,
@@ -114,6 +129,7 @@ function App() {
       crimesPorMunicipio: rawData.crimesPorMunicipio,
       topBairros: rawData.topBairros,
       objetosMaisRoubados: rawData.objetosMaisRoubados,
+      objetosMaisRoubadosPorMunicipio: rawData.objetosMaisRoubadosPorMunicipio,
       perfilVitimas: rawData.perfilVitimas,
     };
   }, [rawData]);

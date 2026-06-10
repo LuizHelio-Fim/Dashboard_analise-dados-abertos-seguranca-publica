@@ -164,7 +164,8 @@
   gap: 8px;
   position: relative;
 }
-.filters-toggle-button:hover {
+.filters-toggle-button:hover,
+.filters-toggle-button.open {
   background: #1e293b;
   transform: translateY(-1px);
 }
@@ -228,7 +229,7 @@
   text-decoration: underline;
 }
 .filters-panel-content {
-  max-height: 70vh;
+  max-height: 82vh;
   overflow-y: auto;
   padding: 16px;
 }
@@ -253,23 +254,25 @@
 }
 .downloads-section .export-page-buttons {
   justify-content: flex-start;
-  gap: 12px;
+  gap: 16px;
 }
 .downloads-section .export-page-buttons button {
-  padding: 6px 12px;
-  font-size: 0.8rem;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  min-width: 140px;
 }
 
 .export-page-buttons button {
   background: #ffffff;
   border: 1px solid #cbd5e1;
   border-radius: 999px;
-  padding: 8px 12px;
-  font-size: 0.875rem;
-  font-weight: 500;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
   color: #0f172a;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .export-page-buttons button:hover {
@@ -280,7 +283,27 @@
 
 .filters-panel-portal {
   position: fixed;
+  inset: 0;
   z-index: 9999;
+  display: block;
+}
+.filters-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.25);
+  backdrop-filter: blur(3px);
+}
+.filters-panel {
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 760px;
+  max-width: 96vw;
+  min-height: 360px;
 }
 
 /* ========== DATE RANGE SLIDER - SEM SOBREPOSIÇÃO ========== */
@@ -419,6 +442,9 @@
   gap: 16px;
   align-items: center;
   text-align: center;
+}
+.downloads-section .export-page-buttons {
+  justify-content: center;
 }
 .downloads-hint {
   font-size: 0.7rem;

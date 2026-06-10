@@ -62,7 +62,7 @@ function PatrimonialPage({ data, onMunicipioClick }) {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="mes" tick={{ fill: '#475569', fontSize: 12 }} />
               <YAxis tick={{ fill: '#475569', fontSize: 12 }} />
-              <Tooltip formatter={(value) => [formatCompactNumber(value), 'Ocorrências']} />
+              <Tooltip formatter={(value, name) => [formatCompactNumber(value), name]} />
               <Legend />
               <Line type="monotone" dataKey="furtos" name="Furtos" stroke="#3B82F6" strokeWidth={3} dot={{ r: 4 }} />
               <Line type="monotone" dataKey="roubos" name="Roubos" stroke="#64748B" strokeWidth={3} dot={{ r: 4 }} />

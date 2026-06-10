@@ -258,6 +258,11 @@ def add_derived_columns(df: pd.DataFrame, source_name: str, category: str) -> pd
         if column in df.columns:
             df[column] = clean_text_series(df[column])
 
+    if "cor" in df.columns:
+        df["cor"] = df["cor"].replace({"S I": "INDETERMINADA", "SI": "INDETERMINADA", "S/I": "INDETERMINADA"})
+    if "cutis" in df.columns:
+        df["cutis"] = df["cutis"].replace({"S I": "INDETERMINADA", "SI": "INDETERMINADA", "S/I": "INDETERMINADA"})
+
     return df
 
 
@@ -411,6 +416,18 @@ def export_crimes_por_mes(fact_table: pd.DataFrame) -> pd.DataFrame:
     return crimes_por_mes
 
 
+def export_crimes_por_mes_por_municipio(fact_table: pd.DataFrame) -> pd.DataFrame:
+    valid_table = fact_table.loc[is_valid_location_row(fact_table) & fact_table["data_mes"].notna()]
+    crimes_por_mes_por_municipio = (
+        valid_table.groupby(["data_mes", "municipio", "categoria_macro"], as_index=False)
+        .size()
+        .rename(columns={"size": "quantidade"})
+        .sort_values(["data_mes", "municipio", "categoria_macro"], ascending=[True, True, True])
+    )
+    crimes_por_mes_por_municipio.to_csv(PROCESSED_DIR / "crimes_por_mes_por_municipio.csv", index=False, encoding="utf-8-sig")
+    return crimes_por_mes_por_municipio
+
+
 def export_crimes_por_municipio(fact_table: pd.DataFrame) -> pd.DataFrame:
     valid_table = fact_table.loc[is_valid_location_row(fact_table)]
     crimes_por_municipio = (
@@ -434,6 +451,19 @@ def export_crimes_por_periodo(fact_table: pd.DataFrame) -> pd.DataFrame:
     )
     crimes_por_periodo.to_csv(PROCESSED_DIR / "crimes_por_periodo.csv", index=False, encoding="utf-8-sig")
     return crimes_por_periodo
+
+
+def export_crimes_por_periodo_por_municipio(fact_table: pd.DataFrame) -> pd.DataFrame:
+    valid_table = fact_table.loc[is_valid_location_row(fact_table)]
+    crimes_por_periodo_por_municipio = (
+        valid_table
+        .groupby(["periodo_dia", "municipio", "categoria_macro"], as_index=False)
+        .size()
+        .rename(columns={"size": "quantidade"})
+        .sort_values(["municipio", "periodo_dia", "quantidade"], ascending=[True, True, False])
+    )
+    crimes_por_periodo_por_municipio.to_csv(PROCESSED_DIR / "crimes_por_periodo_por_municipio.csv", index=False, encoding="utf-8-sig")
+    return crimes_por_periodo_por_municipio
 
 
 def export_top_bairros(fact_table: pd.DataFrame) -> pd.DataFrame:
@@ -507,6 +537,23 @@ def export_objetos_mais_roubados(cleaned_frames: dict[str, pd.DataFrame]) -> pd.
     return objetos_mais_roubados
 
 
+def export_objetos_mais_roubados_por_municipio(cleaned_frames: dict[str, pd.DataFrame]) -> pd.DataFrame:
+    objetos = cleaned_frames.get("objetos")
+    if objetos is not None and {"tipo_objeto", "acao_objeto", "municipio"}.issubset(objetos.columns):
+        valid_objetos = objetos.loc[is_valid_object_row(objetos)]
+        objetos_mais_roubados_por_municipio = (
+            valid_objetos.groupby(["municipio", "tipo_objeto", "acao_objeto"], as_index=False)
+            .size()
+            .rename(columns={"size": "quantidade"})
+            .sort_values(["municipio", "quantidade", "tipo_objeto"], ascending=[True, False, True])
+        )
+    else:
+        objetos_mais_roubados_por_municipio = pd.DataFrame(columns=["municipio", "tipo_objeto", "acao_objeto", "quantidade"])
+
+    objetos_mais_roubados_por_municipio.to_csv(PROCESSED_DIR / "objetos_mais_roubados_por_municipio.csv", index=False, encoding="utf-8-sig")
+    return objetos_mais_roubados_por_municipio
+
+
 def export_perfil_vitimas(cleaned_frames: dict[str, pd.DataFrame]) -> pd.DataFrame:
     perfil_frames = []
 
@@ -555,11 +602,14 @@ def export_crimes_digitais_evolucao(fact_table: pd.DataFrame) -> pd.DataFrame:
 def build_analytics(fact_table: pd.DataFrame, cleaned_frames: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
     return {
         "crimes_por_mes": export_crimes_por_mes(fact_table),
+        "crimes_por_mes_por_municipio": export_crimes_por_mes_por_municipio(fact_table),
         "crimes_por_municipio": export_crimes_por_municipio(fact_table),
         "crimes_por_periodo": export_crimes_por_periodo(fact_table),
+        "crimes_por_periodo_por_municipio": export_crimes_por_periodo_por_municipio(fact_table),
         "top_bairros": export_top_bairros(fact_table),
         "comparativo_furto_roubo": export_comparativo_furto_roubo(fact_table),
         "objetos_mais_roubados": export_objetos_mais_roubados(cleaned_frames),
+        "objetos_mais_roubados_por_municipio": export_objetos_mais_roubados_por_municipio(cleaned_frames),
         "perfil_vitimas": export_perfil_vitimas(cleaned_frames),
         "crimes_digitais_evolucao": export_crimes_digitais_evolucao(fact_table),
         "qualidade_dados_localidade": export_data_quality_metrics(fact_table),

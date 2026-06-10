@@ -2695,7 +2695,7 @@ violencia_domestica,violencia_social,,,23.0,18_24,ECOPORANGA,BENEDITA MONTEIRO,F
 violencia_domestica,violencia_social,,,23.0,18_24,CARIACICA,CARIACICA SEDE,FEMININO,PARDA
 violencia_domestica,violencia_social,,,23.0,18_24,ANCHIETA,CENTRO,FEMININO,NEGRA
 violencia_domestica,violencia_social,,,23.0,18_24,CARIACICA,VILA INDEPENDENCIA,FEMININO,BRANCA
-violencia_domestica,violencia_social,,,24.0,18_24,LINHARES,NOVA ESPERANCA,FEMININO,S I
+violencia_domestica,violencia_social,,,24.0,18_24,LINHARES,NOVA ESPERANCA,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,25.0,25_34,ARACRUZ,SANTA LUZIA,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,25.0,25_34,ANCHIETA,MAIMBA,FEMININO,PARDA
 violencia_domestica,violencia_social,,,25.0,25_34,VARGEM ALTA,VILA MARIA,FEMININO,BRANCA
@@ -4163,7 +4163,7 @@ violencia_domestica,violencia_social,,,30.0,25_34,BAIXO GUANDU,CENTRO,FEMININO,B
 violencia_domestica,violencia_social,,,31.0,25_34,JAGUARE,FATIMA,FEMININO,PARDA
 violencia_domestica,violencia_social,,,31.0,25_34,ALEGRE,CENTRO,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,31.0,25_34,CACHOEIRO DE ITAPEMIRIM,SUMARE,FEMININO,AMARELA
-violencia_domestica,violencia_social,,,31.0,25_34,CACHOEIRO DE ITAPEMIRIM,AEROPORTO,FEMININO,S I
+violencia_domestica,violencia_social,,,31.0,25_34,CACHOEIRO DE ITAPEMIRIM,AEROPORTO,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,31.0,25_34,CARIACICA,JARDIM AMERICA,FEMININO,PARDA
 violencia_domestica,violencia_social,,,31.0,25_34,CARIACICA,NOVA ESPERANCA,FEMININO,PARDA
 violencia_domestica,violencia_social,,,32.0,25_34,SERRA,NOVA CARAPINA II,FEMININO,BRANCA
@@ -4984,7 +4984,7 @@ violencia_domestica,violencia_social,,,47.0,45_54,LINHARES,CANIVETE,FEMININO,BRA
 violencia_domestica,violencia_social,,,49.0,45_54,MUNIZ FREIRE,SAO VICENTE DE PAULA,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,49.0,45_54,ATILIO VIVACQUA,FLECHEIRA,FEMININO,NEGRA
 violencia_domestica,violencia_social,,,52.0,45_54,SERRA,BAIRRO DE FATIMA,FEMININO,BRANCA
-violencia_domestica,violencia_social,,,52.0,45_54,SERRA,VALPARAISO,FEMININO,S I
+violencia_domestica,violencia_social,,,52.0,45_54,SERRA,VALPARAISO,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,53.0,45_54,SERRA,SERRA DOURADA III,FEMININO,PARDA
 violencia_domestica,violencia_social,,,53.0,45_54,CARIACICA,PROLAR,FEMININO,PARDA
 violencia_domestica,violencia_social,,,54.0,45_54,ANCHIETA,BOA VISTA,FEMININO,BRANCA
@@ -7397,7 +7397,7 @@ violencia_domestica,violencia_social,,,30.0,25_34,CARIACICA,ITAQUARI,FEMININO,PA
 violencia_domestica,violencia_social,,,31.0,25_34,NOVA VENECIA,ALTOE,FEMININO,PARDA
 violencia_domestica,violencia_social,,,31.0,25_34,BARRA DE SAO FRANCISCO,MONTE SENIR,FEMININO,PARDA
 violencia_domestica,violencia_social,,,32.0,25_34,VIANA,JUCU,FEMININO,BRANCA
-violencia_domestica,violencia_social,,,33.0,25_34,VILA VELHA,TERRA VERMELHA,FEMININO,S I
+violencia_domestica,violencia_social,,,33.0,25_34,VILA VELHA,TERRA VERMELHA,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,35.0,35_44,GUACUI,MORADA DAS PALMEIRAS,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,36.0,35_44,VILA VELHA,PRAIA DA COSTA,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,37.0,35_44,CACHOEIRO DE ITAPEMIRIM,AEROPORTO,FEMININO,PARDA
@@ -8160,10 +8160,10 @@ violencia_domestica,violencia_social,,,60.0,55_64,JOAO NEIVA,SANTA LUZIA,FEMININ
 violencia_domestica,violencia_social,,,65.0,65_PLUS,SERRA,SERRAMAR,FEMININO,PARDA
 violencia_domestica,violencia_social,,,70.0,65_PLUS,CACHOEIRO DE ITAPEMIRIM,BAIMINAS,FEMININO,PARDA
 violencia_domestica,violencia_social,,,71.0,65_PLUS,CACHOEIRO DE ITAPEMIRIM,SAO FRANCISCO DE ASSIS,FEMININO,NEGRA
-violencia_domestica,violencia_social,,,14.0,0_14,CASTELO,ESPLANADA,FEMININO,S I
+violencia_domestica,violencia_social,,,14.0,0_14,CASTELO,ESPLANADA,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,17.0,15_17,CACHOEIRO DE ITAPEMIRIM,ZUMBI,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,17.0,15_17,SOORETAMA,CENTRO,FEMININO,BRANCA
-violencia_domestica,violencia_social,,,17.0,15_17,CASTELO,ESPLANADA,FEMININO,S I
+violencia_domestica,violencia_social,,,17.0,15_17,CASTELO,ESPLANADA,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,18.0,18_24,LINHARES,PALMITAL,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,19.0,18_24,CACHOEIRO DE ITAPEMIRIM,ZUMBI,FEMININO,NEGRA
 violencia_domestica,violencia_social,,,21.0,18_24,GUARAPARI,CAMURUGI,FEMININO,NEGRA
@@ -12340,7 +12340,7 @@ violencia_domestica,violencia_social,,,26.0,25_34,VILA VELHA,JOCKEY DE ITAPARICA
 violencia_domestica,violencia_social,,,26.0,25_34,SERRA,CASTELANDIA,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,27.0,25_34,CACHOEIRO DE ITAPEMIRIM,WALDIR FURTADO AMORIM,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,27.0,25_34,SERRA,NOVO HORIZONTE,FEMININO,BRANCA
-violencia_domestica,violencia_social,,,28.0,25_34,CACHOEIRO DE ITAPEMIRIM,BNH,FEMININO,S I
+violencia_domestica,violencia_social,,,28.0,25_34,CACHOEIRO DE ITAPEMIRIM,BNH,FEMININO,INDETERMINADA
 violencia_domestica,violencia_social,,,28.0,25_34,SERRA,SERRAMAR,FEMININO,PARDA
 violencia_domestica,violencia_social,,,28.0,25_34,VITORIA,BENTO FERREIRA,FEMININO,BRANCA
 violencia_domestica,violencia_social,,,29.0,25_34,CARIACICA,VILA MERLO,FEMININO,PARDA
